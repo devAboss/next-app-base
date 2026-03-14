@@ -11,4 +11,5 @@ generator client {
 
 datasource db {
   provider = "mysql"
+  // @ts-ignore - Prisma 7 uses url from prisma.config.ts
 }
