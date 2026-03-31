@@ -9,15 +9,15 @@
 - 일관된 디자인 시스템 유지
 
 ## 프로젝트 개요
-- **프레임워크**: Next.js 16.1.4 (App Router)
-- **언어**: TypeScript 5.9.3
-- **스타일링**: Tailwind CSS 4
-- **상태 관리**: Zustand 5.0.10, TanStack Query 5.90.20
+- **프레임워크**: Next.js 16.2.1 (App Router)
+- **언어**: TypeScript 6.0.2
+- **스타일링**: Tailwind CSS 4.2.2
+- **상태 관리**: Zustand 5.0.12, TanStack Query 5.95.2
 - **UI 라이브러리**: Base UI, Radix UI, shadcn/ui
-- **인증**: better-auth 1.4.17
-- **API**: tRPC 11.8.1
-- **데이터베이스**: Prisma 6.19.2
-- **폼 관리**: React Hook Form 7.71.1 + Zod 4.3.6
+- **인증**: better-auth 1.5.6
+- **API**: tRPC 11.16.0
+- **데이터베이스**: Prisma 7.6.0
+- **폼 관리**: React Hook Form 7.72.0 + Zod 4.3.6
 
 ---
 
@@ -807,4 +807,4 @@ AI: "로그인 폼 만들어줘"
 
 ---
 
-**버전**: 3.0.0 | **마지막 업데이트**: 2025-01 | **package.json 기반**
+**버전**: 3.0.0 | **마지막 업데이트**: 2026-03 | **package.json 기반**
