@@ -12,12 +12,12 @@
 - **프레임워크**: Next.js 16.2.1 (App Router)
 - **언어**: TypeScript 6.0.2
 - **스타일링**: Tailwind CSS 4.2.2
-- **상태 관리**: Zustand 5.0.12, TanStack Query 5.95.2
+- **상태 관리**: Zustand 5.0.12, TanStack Query 5.99.0
 - **UI 라이브러리**: Base UI, Radix UI, shadcn/ui
-- **인증**: better-auth 1.5.6
+- **인증**: better-auth 1.6.4
 - **API**: tRPC 11.16.0
-- **데이터베이스**: Prisma 7.6.0
-- **폼 관리**: React Hook Form 7.72.0 + Zod 4.3.6
+- **데이터베이스**: Prisma 7.7.0
+- **폼 관리**: React Hook Form 7.72.1 + Zod 4.3.6
 
 ---
 
@@ -807,4 +807,4 @@ AI: "로그인 폼 만들어줘"
 
 ---
 
-**버전**: 3.0.0 | **마지막 업데이트**: 2026-03 | **package.json 기반**
+**버전**: 3.0.0 | **마지막 업데이트**: 2026-04 | **package.json 기반**
