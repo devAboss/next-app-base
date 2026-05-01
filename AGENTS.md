@@ -9,15 +9,15 @@
 - 일관된 디자인 시스템 유지
 
 ## 프로젝트 개요
-- **프레임워크**: Next.js 16.2.1 (App Router)
-- **언어**: TypeScript 6.0.2
-- **스타일링**: Tailwind CSS 4.2.2
-- **상태 관리**: Zustand 5.0.12, TanStack Query 5.99.0
+- **프레임워크**: Next.js 16.2.4 (App Router)
+- **언어**: TypeScript 6.0.3
+- **스타일링**: Tailwind CSS 4.2.4
+- **상태 관리**: Zustand 5.0.12, TanStack Query 5.100.7
 - **UI 라이브러리**: Base UI, Radix UI, shadcn/ui
-- **인증**: better-auth 1.6.4
-- **API**: tRPC 11.16.0
-- **데이터베이스**: Prisma 7.7.0
-- **폼 관리**: React Hook Form 7.72.1 + Zod 4.3.6
+- **인증**: better-auth 1.6.9
+- **API**: tRPC 11.17.0
+- **데이터베이스**: Prisma 7.8.0
+- **폼 관리**: React Hook Form 7.74.0 + Zod 4.4.1
 
 ---
 
@@ -116,7 +116,8 @@ AI가 MCP 도구를 직접 호출하여 개발 작업을 자동화합니다.
 ├── lib/             # 유틸리티, auth, trpc-client
 ├── server/          # tRPC 라우터
 ├── prisma/          # schema.prisma, seed.ts
-└── public/          # 정적 파일
+├── public/          # 정적 파일
+└── proxy.ts         # ⚠️ Next 16: middleware.ts 대신 사용 (구버전은 deprecated)
 ```
 
 ### 컴포넌트 원칙
@@ -783,6 +784,33 @@ AI: "로그인 폼 만들어줘"
 - React 19 사용
 - App Router 기본
 - 서버 액션 지원
+- **`middleware.ts` → `proxy.ts` 변경 (필수)**
+  - Next 16부터 `middleware` 파일 컨벤션은 **deprecated**
+  - 두 파일이 동시에 존재하면 빌드 실패 (에러 코드 E900)
+  - 마이그레이션 가이드: https://nextjs.org/docs/messages/middleware-to-proxy
+
+#### proxy.ts 사용 예시
+```typescript
+// proxy.ts (프로젝트 루트, 또는 src/proxy.ts)
+import { NextResponse, type NextRequest } from "next/server"
+
+export function proxy(request: NextRequest) {
+  // 인증, 리다이렉트, 헤더 변경 등 엣지 로직
+  const session = request.cookies.get("session")
+  if (!session && request.nextUrl.pathname.startsWith("/dashboard")) {
+    return NextResponse.redirect(new URL("/login", request.url))
+  }
+  return NextResponse.next()
+}
+
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+}
+```
+
+- 함수명은 `proxy` (named) 또는 `default export` 둘 다 허용
+- `config.matcher`로 적용 경로 지정 (기존 middleware와 동일 문법)
+- `next/server`의 `NextRequest`/`NextResponse` API는 변경 없음
 
 ---
 
@@ -807,4 +835,4 @@ AI: "로그인 폼 만들어줘"
 
 ---
 
-**버전**: 3.0.0 | **마지막 업데이트**: 2026-04 | **package.json 기반**
+**버전**: 3.0.0 | **마지막 업데이트**: 2026-05 | **package.json 기반**

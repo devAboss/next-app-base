@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Inter } from "next/font/google";
+import { GrabLoader } from "@/components/grab-loader";
 import "./globals.css";
 
 const inter = Inter({
@@ -27,15 +27,11 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css"
           crossOrigin="anonymous"
         />
-        {process.env.NODE_ENV === "development" && (
-          <Script
-            src="//unpkg.com/react-grab/dist/index.global.js"
-            crossOrigin="anonymous"
-            strategy="beforeInteractive"
-          />
-        )}
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {process.env.NODE_ENV === "development" && <GrabLoader />}
+        {children}
+      </body>
     </html>
   );
 }
